@@ -193,12 +193,12 @@ const exercicio13 = () => {
   let error = document.getElementById("erro");
   let result = document.getElementById("resultado");
   let menor, maior;
-  if (num1 < num2) {
-    menor = num1;
-    maior = num2;
+  if (Number(num1) < Number(num2)) {
+    menor = Number(num1);
+    maior = Number(num2);
   } else {
-    menor = num2;
-    maior = num1;
+    menor = Number(num2);
+    maior = Number(num1);
   }
 
   if (menor <= 0 || maior <= 0) {
@@ -267,7 +267,7 @@ const exercicio16 = () => {
   let num1 = document.getElementById("num1").value;
   let areaCirculo = 0;
   if (num1 <= 0) {
-    error.innerText = `O número não é um número válido, insira um número positivo!`;
+    error.innerText = `O número apresentado não é válido, insira um número positivo!`;
     result.innerText = "";
   } else {
     error.innerText = "";
@@ -283,7 +283,7 @@ const exercicio17 = () => {
   let num1 = document.getElementById("num1").value;
   let num2 = document.getElementById("num2").value;
   if (num1 <= 0) {
-    error.innerText = `O número não é um número válido, insira um número positivo!`;
+    error.innerText = `O número apresentado não é válido, insira um número positivo!`;
     result.innerText = "";
   } else {
     error.innerText = "";
@@ -300,7 +300,7 @@ const exercicio18 = () => {
   let num3 = document.getElementById("num3").value;
   let areaTrapezio = 0;
   if (num1 <= 0) {
-    error.innerText = `O número não é um número válido, insira um número positivo!`;
+    error.innerText = `O número apresentado não é válido, insira um número positivo!`;
     result.innerText = "";
   } else {
     error.innerText = "";
@@ -387,19 +387,40 @@ const exercicio23 = () => {
   let palavrafrase = frase.split(" ");
   let contador = 0;
 
-  for (let i = 0; i < palavrafrase.length; i++) {
-    if (palavrafrase[i] === palavra) {
-      contador++;
-      result.innerText = `A palavra '${palavra}' apareceu ${contador} vezes na frase!`;
-      error.innerText = "";
-    } else {
-      error.innerText = "Preencha os campos!";
-      result.innerText = "";
+  if (frase == "" || palavra == "") {
+    error.innerText = "Preencha os campos!";
+  } else {
+    for (let i = 0; i < palavrafrase.length; i++) {
+      if (palavrafrase[i] === palavra) {
+        contador++;
+        result.innerText = `A palavra '${palavra}' apareceu ${contador} vezes na frase!`;
+        error.innerText = "";
+      }
     }
   }
 };
 
-const exercicio24 = () => {};
+const exercicio24 = () => {
+  let valor = document.getElementById("frase").value;
+  let frase = valor.split(" ");
+  let result = document.getElementById("resultado");
+  let error = document.getElementById("erro");
+  const letrasMaiusculas = [];
+  error.innerText = "";
+  result.innerText = "";
+
+  if (valor == "") {
+    error.innerText = "Informe uma frase!";
+  } else {
+    const mudarFrase = frase.map((palavra) => {
+      //O map tem como objetivo retornar as alterações feitas pela função
+      const primeiraletraMaiuscula = palavra[0].toUpperCase(); //Seleciona o primeiro caracter da palavra colocada
+      letrasMaiusculas.push(primeiraletraMaiuscula); //A primeira letra se torna maiúscula no vetor primeiraletraMaiuscula
+      return primeiraletraMaiuscula + palavra.slice(1); //Adicionando as letras maiúsculas na frase digitada pelo usúario
+    });
+    resultado.innerHTML = `${mudarFrase.join(" ")}`;
+  }
+};
 
 const exercicio25 = () => {
   let num1 = document.getElementById("num1").value;
